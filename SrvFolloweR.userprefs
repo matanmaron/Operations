@@ -1,0 +1,13 @@
+﻿<Properties StartupConfiguration="{1B2A184D-5782-4F65-B434-4950ACD1B137}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="SrvFolloweR/Program.cs">
+    <Files>
+      <File FileName="SrvFolloweR/Program.cs" Line="23" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MultiItemStartupConfigurations />
+</Properties>
