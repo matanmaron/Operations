@@ -72,14 +72,6 @@ namespace SrvFolloweR
         }
         void Load_Autoload_Settings()
         {
-            if (Bautoload)
-            {
-                checkBox_AutoLoad.Checked = true;
-            }
-            else
-            {
-                checkBox_AutoLoad.Checked = false;
-            }
             if (Benglish)
             {
                 checkBox_English.Checked = true;
@@ -118,12 +110,12 @@ namespace SrvFolloweR
         {
             if (!Benglish)
             {
-                button_GetCalls.Text = "שיחות";
-                button_Load.Text = "טעינה";
-                button_Save.Text = "שמירה";
-                button_SaveExit.Text = "שמור וצא";
+                //button_GetCalls.Text = "שיחות";
+                //button_Load.Text = "טעינה";
+               // button_Save.Text = "שמירה";
+                //button_SaveExit.Text = "שמור וצא";
                 checkBox_English.Text = "English";
-                checkBox_AutoLoad.Text = "טעינה אוטומטית";
+                //checkBox_AutoLoad.Text = "טעינה אוטומטית";
                 msg_save_ok = "שמירה בוצעה בהצלחה !";
                 msg_load_ok = "טעינה בוצעה בהצלחה !";
                 msg_load_fail = "לא ניתן לטעון את הקובץ !";
@@ -131,12 +123,12 @@ namespace SrvFolloweR
             }
             else
             {
-                button_GetCalls.Text = "Calls";
-                button_Load.Text = "Load";
-                button_Save.Text = "Save";
-                button_SaveExit.Text = "Save & Exit";
+                //button_GetCalls.Text = "Calls";
+                //button_Load.Text = "Load";
+                //button_Save.Text = "Save";
+                //button_SaveExit.Text = "Save & Exit";
                 checkBox_English.Text = "עברית";
-                checkBox_AutoLoad.Text = "Autoload";
+                //checkBox_AutoLoad.Text = "Autoload";
                 msg_save_ok = "Saved successfully !";
                 msg_load_ok = "Load successfully !";
                 msg_load_fail = "Load Failed";
@@ -183,21 +175,6 @@ namespace SrvFolloweR
             this.Update();
         }
 
-        private void checkBox_AutoLoad_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBox_AutoLoad.Checked)
-            {
-                checkBox_AutoLoad.Checked = true;
-                Bautoload = true;
-            }
-            else
-            {
-                checkBox_AutoLoad.Checked = false;
-                Bautoload = false;
-            }
-            this.Update();
-        }
-
         private void button_GetCalls_Click(object sender, EventArgs e)
         {
             LastSave();
@@ -206,7 +183,7 @@ namespace SrvFolloweR
         #endregion
 
         #region save-load handaling
-        void LastSave()
+        void LastSave() //with backups
         {
             if (!Directory.Exists("Data"))
                 Directory.CreateDirectory("Data");
@@ -340,6 +317,7 @@ namespace SrvFolloweR
             {
                 MessageBox.Show(ex.Message);
             }
+            CsvSave();
         }
         private void dataGridView1_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
@@ -363,6 +341,7 @@ namespace SrvFolloweR
                     LastId = temp.ReshumaId + 1;
                 }
             }
+            CsvSave();
         }
         private void dtp_ValueChanged(object sender, EventArgs e)
         {
@@ -407,6 +386,7 @@ namespace SrvFolloweR
                     }
                     catch (Exception ex)
                     {
+                        MessageBox.Show(ex.Message);
                         ccsv.Dispose();
                     }
 

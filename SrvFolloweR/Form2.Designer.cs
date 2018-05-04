@@ -29,53 +29,61 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.button_SaveExit = new System.Windows.Forms.Button();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.CallEnd = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.button_Save = new System.Windows.Forms.Button();
-            this.button_LoadCalls = new System.Windows.Forms.Button();
+            this.button_Back = new System.Windows.Forms.Button();
             this.callIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.reprepresentativeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contentsDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.callDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.remarksDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.callBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.button_Back = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.callBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // button_SaveExit
             // 
-            this.button_SaveExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.button_SaveExit.BackColor = System.Drawing.Color.PaleGoldenrod;
+            this.button_SaveExit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.button_SaveExit.BackgroundImage = global::SrvFolloweR.Properties.Resources.exit_door_way_form_2_256;
+            this.button_SaveExit.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button_SaveExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button_SaveExit.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.button_SaveExit.Location = new System.Drawing.Point(12, 668);
+            this.button_SaveExit.Location = new System.Drawing.Point(10, 12);
             this.button_SaveExit.Name = "button_SaveExit";
-            this.button_SaveExit.Size = new System.Drawing.Size(241, 49);
+            this.button_SaveExit.Size = new System.Drawing.Size(50, 50);
             this.button_SaveExit.TabIndex = 2;
             this.button_SaveExit.UseVisualStyleBackColor = false;
             this.button_SaveExit.Click += new System.EventHandler(this.button_exit_Click);
             // 
             // dataGridView2
             // 
-            this.dataGridView2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Gray;
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.DodgerBlue;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White;
+            this.dataGridView2.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.dataGridView2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView2.AutoGenerateColumns = false;
             this.dataGridView2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView2.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.NullValue = "0";
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView2.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            this.dataGridView2.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.Gray;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.NullValue = "0";
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.DodgerBlue;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView2.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.callIDDataGridViewTextBoxColumn,
@@ -85,16 +93,30 @@
             this.CallEnd,
             this.remarksDataGridViewTextBoxColumn});
             this.dataGridView2.DataSource = this.callBindingSource;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView2.DefaultCellStyle = dataGridViewCellStyle4;
-            this.dataGridView2.Location = new System.Drawing.Point(10, 12);
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.Gray;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.DodgerBlue;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView2.DefaultCellStyle = dataGridViewCellStyle3;
+            this.dataGridView2.GridColor = System.Drawing.Color.Silver;
+            this.dataGridView2.Location = new System.Drawing.Point(10, 67);
             this.dataGridView2.Name = "dataGridView2";
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.Gray;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.DodgerBlue;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView2.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.Gray;
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.DodgerBlue;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.White;
+            this.dataGridView2.RowsDefaultCellStyle = dataGridViewCellStyle5;
             this.dataGridView2.Size = new System.Drawing.Size(984, 650);
             this.dataGridView2.TabIndex = 5;
             this.dataGridView2.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellClick);
@@ -110,29 +132,19 @@
             this.CallEnd.ReadOnly = true;
             this.CallEnd.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             // 
-            // button_Save
+            // button_Back
             // 
-            this.button_Save.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_Save.BackColor = System.Drawing.Color.SpringGreen;
-            this.button_Save.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.button_Save.Location = new System.Drawing.Point(755, 668);
-            this.button_Save.Name = "button_Save";
-            this.button_Save.Size = new System.Drawing.Size(241, 49);
-            this.button_Save.TabIndex = 6;
-            this.button_Save.UseVisualStyleBackColor = false;
-            this.button_Save.Click += new System.EventHandler(this.button_Save_Click);
-            // 
-            // button_LoadCalls
-            // 
-            this.button_LoadCalls.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_LoadCalls.BackColor = System.Drawing.Color.Turquoise;
-            this.button_LoadCalls.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.button_LoadCalls.Location = new System.Drawing.Point(508, 668);
-            this.button_LoadCalls.Name = "button_LoadCalls";
-            this.button_LoadCalls.Size = new System.Drawing.Size(241, 49);
-            this.button_LoadCalls.TabIndex = 7;
-            this.button_LoadCalls.UseVisualStyleBackColor = false;
-            this.button_LoadCalls.Click += new System.EventHandler(this.button_LoadCalls_Click);
+            this.button_Back.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.button_Back.BackgroundImage = global::SrvFolloweR.Properties.Resources.icon_23_256;
+            this.button_Back.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button_Back.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button_Back.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.button_Back.Location = new System.Drawing.Point(66, 12);
+            this.button_Back.Name = "button_Back";
+            this.button_Back.Size = new System.Drawing.Size(50, 50);
+            this.button_Back.TabIndex = 8;
+            this.button_Back.UseVisualStyleBackColor = false;
+            this.button_Back.Click += new System.EventHandler(this.button_Back_Click);
             // 
             // callIDDataGridViewTextBoxColumn
             // 
@@ -171,27 +183,14 @@
             // 
             this.callBindingSource.DataSource = typeof(SrvFolloweR.Call);
             // 
-            // button_Back
-            // 
-            this.button_Back.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.button_Back.BackColor = System.Drawing.Color.Thistle;
-            this.button_Back.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.button_Back.Location = new System.Drawing.Point(259, 668);
-            this.button_Back.Name = "button_Back";
-            this.button_Back.Size = new System.Drawing.Size(241, 49);
-            this.button_Back.TabIndex = 8;
-            this.button_Back.UseVisualStyleBackColor = false;
-            this.button_Back.Click += new System.EventHandler(this.button_Back_Click);
-            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.ClientSize = new System.Drawing.Size(1008, 729);
             this.ControlBox = false;
             this.Controls.Add(this.button_Back);
-            this.Controls.Add(this.button_LoadCalls);
-            this.Controls.Add(this.button_Save);
             this.Controls.Add(this.dataGridView2);
             this.Controls.Add(this.button_SaveExit);
             this.Name = "Form2";
@@ -207,8 +206,6 @@
         private System.Windows.Forms.Button button_SaveExit;
         private System.Windows.Forms.DataGridView dataGridView2;
         private System.Windows.Forms.BindingSource callBindingSource;
-        private System.Windows.Forms.Button button_Save;
-        private System.Windows.Forms.Button button_LoadCalls;
         private System.Windows.Forms.DataGridViewTextBoxColumn callIDDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn reprepresentativeDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn contentsDataGridViewTextBoxColumn;

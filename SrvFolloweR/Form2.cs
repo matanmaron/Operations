@@ -74,23 +74,23 @@ namespace SrvFolloweR
         {
             if (!Form1.Benglish)
             {
-                button_SaveExit.Text = "שמור וחזור";
+                //button_SaveExit.Text = "שמור וחזור";
                 msg_save_ok = "שמירה בוצעה בהצלחה !";
-                button_Save.Text = "שמירה";
-                button_Back.Text = "חזור";
-                button_LoadCalls.Text = "טעינה";
+                //button_Save.Text = "שמירה";
+                //button_Back.Text = "חזור";
+                //button_LoadCalls.Text = "טעינה";
                 msg_load_ok = "טעינה בוצעה בהצלחה !";
                 msg_load_fail = "טעינה נכשלה !";
             }
             else
             {
 
-                button_SaveExit.Text = @"Save & Back";
-                button_Back.Text = "Go Back";
+                //button_SaveExit.Text = @"Save & Back";
+                //button_Back.Text = "Go Back";
                 this.Text = Form1.callsfilename;
                 msg_save_ok = "Saved successfully !";
-                button_Save.Text = "Save";
-                button_LoadCalls.Text = "Load";
+                //button_Save.Text = "Save";
+                //button_LoadCalls.Text = "Load";
                 msg_load_ok = "Load successfully !";
                 msg_load_fail = "Load Failed !";
             }
