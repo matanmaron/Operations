@@ -10,8 +10,8 @@ namespace SrvFolloweR
 {
     public partial class Form2 : Form
     {
-        List<Call> callslist;
-        internal static double LastCallId = 1;
+        internal List<Call> callslist;
+        //internal static double LastCallId = 1;
         DateTimePicker dtp;
         string formHeader;
         string msg_save_ok;
@@ -133,8 +133,11 @@ namespace SrvFolloweR
         {
             LastSave();
             Form1 form1 = new Form1();
-            form1.Show();
             this.Close();
+            form1.Close();
+            form1.WriteSettings();
+            form1.LastSave();
+            Environment.Exit(0);
         }
         private void button_Back_Click(object sender, EventArgs e)
         {
@@ -265,7 +268,7 @@ namespace SrvFolloweR
                 if (callBindingSource != null)
                 {
                     Call temp = (Call)callBindingSource[callBindingSource.Count - 1];
-                    LastCallId = temp.CallID + 1;
+                    //LastCallId = temp.CallID + 1;
                 }
             }
         }

@@ -183,7 +183,7 @@ namespace SrvFolloweR
         #endregion
 
         #region save-load handaling
-        void LastSave() //with backups
+        internal void LastSave() //with backups
         {
             if (!Directory.Exists("Data"))
                 Directory.CreateDirectory("Data");
@@ -222,7 +222,7 @@ namespace SrvFolloweR
                 }
                 sw.Close();
             }
-            MessageBox.Show(msg_save_ok, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //MessageBox.Show(msg_save_ok, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
         private void FirstLoad()
         {
@@ -248,7 +248,7 @@ namespace SrvFolloweR
                 Reshuma temp = (Reshuma)reshumaBindingSource[reshumaBindingSource.Count - 1];
                 LastId = temp.ReshumaId + 1;
                 FindDates();
-                MessageBox.Show(msg_load_ok, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //MessageBox.Show(msg_load_ok, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
             {
@@ -268,7 +268,7 @@ namespace SrvFolloweR
                 }
             }
         }
-        private void WriteSettings()
+        internal void WriteSettings()
         {
             using (StreamWriter writetext = new StreamWriter("confg.set"))
             {
@@ -277,11 +277,17 @@ namespace SrvFolloweR
         }
         void GetCalls()
         {
-            callsfilename = dataGridView1.Rows[selectedrow].Cells[1].Value.ToString() + dataGridView1.Rows[selectedrow].Cells[2].Value.ToString();
-            Form2 form2 = new Form2(callsfilename);
-            form2.Show();
-            isuser = false;
-            this.Hide();
+            if (dataGridView1.Rows[selectedrow].Cells[1].Value!=null && dataGridView1.Rows[selectedrow].Cells[2].Value != null)
+            {
+                callsfilename = dataGridView1.Rows[selectedrow].Cells[1].Value.ToString() + dataGridView1.Rows[selectedrow].Cells[2].Value.ToString();
+            }
+                if (callsfilename != "" && callsfilename != null)
+            {
+                Form2 form2 = new Form2(callsfilename);
+                form2.Show();
+                isuser = false;
+                this.Hide();
+            }
         }
         #endregion
 

@@ -23,13 +23,34 @@ namespace SrvFolloweR
             Company = "";
             Zone = "";
             PhoneNumber = "0";
-            EndDate = DateTime.Today;
+            EndDate = DateTime.Now;
         }
 
         public string Company { get; set; }
         public string Zone { get; set; }
         public string PhoneNumber { get; set; }
-        public DateTime EndDate { get; set; }
+        private int EndDateint;
+        public DateTime EndDate
+        { 
+        get {
+                // Unix timestamp is seconds past epoch
+                System.DateTime dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
+                dtDateTime = dtDateTime.AddSeconds(EndDateint).ToLocalTime();
+                return dtDateTime;
+            }
+        set
+            {
+                EndDateint = (int)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
+            }
+        }
         public int ReshumaId { get; set; }
+
+        public static DateTime UnixTimeStampToDateTime(int unixTimeStamp)
+        {
+            // Unix timestamp is seconds past epoch
+            System.DateTime dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
+            dtDateTime = dtDateTime.AddSeconds(unixTimeStamp).ToLocalTime();
+            return dtDateTime;
+        }
     }
 }

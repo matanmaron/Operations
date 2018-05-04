@@ -35,9 +35,9 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.button_SaveExit = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.EndDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.button_GetCalls = new System.Windows.Forms.Button();
             this.checkBox_English = new System.Windows.Forms.CheckBox();
-            this.EndDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.reshumaIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.companyDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.zoneDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -54,7 +54,7 @@
             this.button_SaveExit.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button_SaveExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button_SaveExit.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.button_SaveExit.ForeColor = System.Drawing.Color.White;
+            this.button_SaveExit.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.button_SaveExit.Location = new System.Drawing.Point(12, 12);
             this.button_SaveExit.Name = "button_SaveExit";
             this.button_SaveExit.Size = new System.Drawing.Size(50, 50);
@@ -118,6 +118,14 @@
             this.dataGridView1.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellEndEdit);
             this.dataGridView1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dataGridView1_KeyDown);
             // 
+            // EndDate
+            // 
+            this.EndDate.DataPropertyName = "EndDate";
+            this.EndDate.HeaderText = "EndDate";
+            this.EndDate.Name = "EndDate";
+            this.EndDate.ReadOnly = true;
+            this.EndDate.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
             // button_GetCalls
             // 
             this.button_GetCalls.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
@@ -125,7 +133,7 @@
             this.button_GetCalls.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button_GetCalls.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button_GetCalls.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F);
-            this.button_GetCalls.ForeColor = System.Drawing.Color.White;
+            this.button_GetCalls.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.button_GetCalls.Location = new System.Drawing.Point(68, 12);
             this.button_GetCalls.Name = "button_GetCalls";
             this.button_GetCalls.Size = new System.Drawing.Size(50, 50);
@@ -139,20 +147,12 @@
             this.checkBox_English.AutoSize = true;
             this.checkBox_English.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.checkBox_English.ForeColor = System.Drawing.Color.White;
-            this.checkBox_English.Location = new System.Drawing.Point(798, 31);
+            this.checkBox_English.Location = new System.Drawing.Point(981, 12);
             this.checkBox_English.Name = "checkBox_English";
             this.checkBox_English.Size = new System.Drawing.Size(15, 14);
             this.checkBox_English.TabIndex = 9;
             this.checkBox_English.UseVisualStyleBackColor = true;
             this.checkBox_English.CheckedChanged += new System.EventHandler(this.checkBox_English_CheckedChanged);
-            // 
-            // EndDate
-            // 
-            this.EndDate.DataPropertyName = "EndDate";
-            this.EndDate.HeaderText = "EndDate";
-            this.EndDate.Name = "EndDate";
-            this.EndDate.ReadOnly = true;
-            this.EndDate.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             // 
             // reshumaIdDataGridViewTextBoxColumn
             // 
@@ -188,6 +188,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.ClientSize = new System.Drawing.Size(1008, 729);
+            this.ControlBox = false;
             this.Controls.Add(this.checkBox_English);
             this.Controls.Add(this.button_GetCalls);
             this.Controls.Add(this.dataGridView1);

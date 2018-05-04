@@ -55,6 +55,7 @@
             this.button_SaveExit.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button_SaveExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button_SaveExit.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.button_SaveExit.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.button_SaveExit.Location = new System.Drawing.Point(10, 12);
             this.button_SaveExit.Name = "button_SaveExit";
             this.button_SaveExit.Size = new System.Drawing.Size(50, 50);
@@ -139,6 +140,7 @@
             this.button_Back.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button_Back.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button_Back.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.button_Back.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.button_Back.Location = new System.Drawing.Point(66, 12);
             this.button_Back.Name = "button_Back";
             this.button_Back.Size = new System.Drawing.Size(50, 50);
@@ -194,6 +196,7 @@
             this.Controls.Add(this.dataGridView2);
             this.Controls.Add(this.button_SaveExit);
             this.Name = "Form2";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Load += new System.EventHandler(this.Form2_Load);
             this.Resize += new System.EventHandler(this.Form2_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();

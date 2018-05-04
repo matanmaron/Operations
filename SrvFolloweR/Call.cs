@@ -19,19 +19,53 @@ namespace SrvFolloweR
 
         public Call()
         {
-            CallID = Form2.LastCallId;
+            //CallID = Form2.LastCallId;
             Reprepresentative = "";
             Contents = "";
-            CallDate = DateTime.Today;
+            CallDate = DateTime.Now;
             Remarks = "";
-            CallEnd = DateTime.Today;
+            CallEnd = DateTime.Now;
         }
 
         public double CallID { get; set; }
         public string Reprepresentative { get; set; }
         public string Contents { get; set; }
-        public DateTime CallDate { get; set; }
+        private int CallDateint;
+        public DateTime CallDate {
+            get {
+                // Unix timestamp is seconds past epoch
+                System.DateTime dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
+                dtDateTime = dtDateTime.AddSeconds(CallDateint).ToLocalTime();
+                return dtDateTime;
+            }
+            set
+            {
+                CallDateint = (int)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
+            }
+        }
         public string Remarks { get; set; }
-        public DateTime CallEnd { get; set; }
+        private int CallEndint;
+        public DateTime CallEnd
+        {
+            get
+            {
+                // Unix timestamp is seconds past epoch
+                System.DateTime dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
+                dtDateTime = dtDateTime.AddSeconds(CallEndint).ToLocalTime();
+                return dtDateTime;
+            }
+            set
+            {
+                CallEndint = (int)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
+            }
+        }
+
+        public static DateTime UnixTimeStampToDateTime(int unixTimeStamp)
+        {
+            // Unix timestamp is seconds past epoch
+            System.DateTime dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
+            dtDateTime = dtDateTime.AddSeconds(unixTimeStamp).ToLocalTime();
+            return dtDateTime;
+        }
     }
 }
