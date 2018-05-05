@@ -5,6 +5,8 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+using System.Xml;
+using System.Xml.Serialization;
 
 namespace SrvFolloweR
 {
@@ -14,10 +16,6 @@ namespace SrvFolloweR
         internal static bool Benglish = false;
         internal static bool mainfullscreen = false;
         internal static bool isuser = false;
-        bool Bautoload = false;
-        string msg_save_ok;
-        string msg_load_ok;
-        string msg_load_fail;
         internal static int LastId = 1;
         DateTimePicker dtp;
         int selectedrow;
@@ -28,15 +26,12 @@ namespace SrvFolloweR
         {
             InitializeComponent();
             resh = new List<Reshuma>();
-            reshumaBindingSource.DataSource = resh;
             ReadSettings();
             Load_Autoload_Settings();
             Ui_Language();
-            if (Bautoload)
-            {
-                FirstLoad();
-            }
+            CsvLoad();
             DataGrid_Language();
+            reshumaBindingSource.DataSource = resh;
             Update();
         }
         private void Form1_Resize(object sender, EventArgs e)
@@ -67,7 +62,7 @@ namespace SrvFolloweR
         private void button_exit_Click(object sender, EventArgs e)
         {
             WriteSettings();
-            LastSave();
+            CsvSave();
             Environment.Exit(0);
         }
         void Load_Autoload_Settings()
@@ -110,28 +105,12 @@ namespace SrvFolloweR
         {
             if (!Benglish)
             {
-                //button_GetCalls.Text = "שיחות";
-                //button_Load.Text = "טעינה";
-               // button_Save.Text = "שמירה";
-                //button_SaveExit.Text = "שמור וצא";
                 checkBox_English.Text = "English";
-                //checkBox_AutoLoad.Text = "טעינה אוטומטית";
-                msg_save_ok = "שמירה בוצעה בהצלחה !";
-                msg_load_ok = "טעינה בוצעה בהצלחה !";
-                msg_load_fail = "לא ניתן לטעון את הקובץ !";
                 this.Text = "מבצעים";
             }
             else
             {
-                //button_GetCalls.Text = "Calls";
-                //button_Load.Text = "Load";
-                //button_Save.Text = "Save";
-                //button_SaveExit.Text = "Save & Exit";
                 checkBox_English.Text = "עברית";
-                //checkBox_AutoLoad.Text = "Autoload";
-                msg_save_ok = "Saved successfully !";
-                msg_load_ok = "Load successfully !";
-                msg_load_fail = "Load Failed";
                 this.Text = "Operations";
             }
         }
@@ -177,83 +156,67 @@ namespace SrvFolloweR
 
         private void button_GetCalls_Click(object sender, EventArgs e)
         {
-            LastSave();
+            CsvSave();
             GetCalls();
         }
         #endregion
 
         #region save-load handaling
-        internal void LastSave() //with backups
+        internal void CsvSave()
         {
             if (!Directory.Exists("Data"))
                 Directory.CreateDirectory("Data");
-            using (var sw = new StreamWriter(@"Data/List.csv"))
+            //FileStream stream = new FileStream(@"Data/dat.xml", FileMode.OpenOrCreate);
+            //if (reshumaBindingSource == null) { return; }
+            try
             {
-                var writer = new CsvWriter(sw);
-                writer.WriteHeader(typeof(Reshuma));
-                foreach (Reshuma resh in reshumaBindingSource.DataSource as List<Reshuma>)
+                XmlDocument xmlDocument = new XmlDocument();
+                XmlSerializer serializer = new XmlSerializer(reshumaBindingSource.GetType());
+                using (MemoryStream stream = new MemoryStream())
                 {
-                    writer.WriteRecord(resh);
+                    serializer.Serialize(stream, reshumaBindingSource);
+                    stream.Position = 0;
+                    xmlDocument.Load(stream);
+                    xmlDocument.Save(@"Data/dat.xml");
+                    stream.Close();
                 }
-                sw.Close();
             }
-            using (var swb = new StreamWriter(@"Data/List" + DateTime.Today.Month.ToString() + ".csv"))
+            catch (Exception ex)
             {
-                var writer = new CsvWriter(swb);
-                writer.WriteHeader(typeof(Reshuma));
-                foreach (Reshuma resh in reshumaBindingSource.DataSource as List<Reshuma>)
-                {
-                    writer.WriteRecord(resh);
-                }
-                swb.Close();
+                MessageBox.Show(ex.ToString());
             }
         }
-        void CsvSave()
+        internal void CsvLoad()
         {
-            if (!Directory.Exists("Data"))
-                Directory.CreateDirectory("Data");
-            using (var sw = new StreamWriter(@"Data/List.csv"))
+            List<Reshuma> objectOut = default(List<Reshuma>);
+            if (File.Exists(@"Data/dat.xml"))
             {
-                var writer = new CsvWriter(sw);
-                writer.WriteHeader(typeof(Reshuma));
-                foreach (Reshuma resh in reshumaBindingSource.DataSource as List<Reshuma>)
+                try
                 {
-                    writer.WriteRecord(resh);
-                }
-                sw.Close();
-            }
-            //MessageBox.Show(msg_save_ok, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
-        private void FirstLoad()
-        {
-            if (File.Exists(@"Data/List.csv"))
-            {
-                var csv = new CsvReader(new StreamReader(@"Data/List.csv"));
-                reshumaBindingSource.DataSource = csv.GetRecords<Reshuma>().ToList();
-                //var header = csv.FieldHeaders; 
-                csv.Dispose();
-                Reshuma temp = (Reshuma)reshumaBindingSource[reshumaBindingSource.Count - 1];
-                LastId = temp.ReshumaId + 1;
-            }
+                    XmlDocument xmlDocument = new XmlDocument();
+                    xmlDocument.Load(@"Data/dat.xml");
+                    string xmlString = xmlDocument.OuterXml;
 
-        }
-        void CsvLoad()
-        {
-            if (File.Exists(@"Data/List.csv"))
-            {
-                var csv = new CsvReader(new StreamReader(@"Data/List.csv"));
-                reshumaBindingSource.DataSource = csv.GetRecords<Reshuma>().ToList();
-                //var header = csv.FieldHeaders; 
-                csv.Dispose();
-                Reshuma temp = (Reshuma)reshumaBindingSource[reshumaBindingSource.Count - 1];
-                LastId = temp.ReshumaId + 1;
-                FindDates();
-                //MessageBox.Show(msg_load_ok, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    using (StringReader read = new StringReader(xmlString))
+                    {
+                        Type outType = typeof(Reshuma);
+
+                        XmlSerializer serializer = new XmlSerializer(outType);
+                        using (XmlReader reader = new XmlTextReader(read))
+                        {
+                            objectOut = (List<Reshuma>)serializer.Deserialize(reader);
+                            reader.Close();
+                        }
+
+                        read.Close();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
             }
-            else
-            {
-                MessageBox.Show(msg_load_fail, "Message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
+            resh = objectOut;
         }
         private void ReadSettings()
         {
@@ -264,7 +227,6 @@ namespace SrvFolloweR
                     string readMeText = readtext.ReadLine();
                     string[] words = readMeText.Split(';');
                     Benglish = bool.Parse(words[0]);
-                    Bautoload = bool.Parse(words[1]);
                 }
             }
         }
@@ -272,7 +234,7 @@ namespace SrvFolloweR
         {
             using (StreamWriter writetext = new StreamWriter("confg.set"))
             {
-                writetext.WriteLine("{0};{1}", Benglish, Bautoload);
+                writetext.WriteLine("{0};{1}", Benglish);
             }
         }
         void GetCalls()

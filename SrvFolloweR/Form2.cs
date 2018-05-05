@@ -5,10 +5,12 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+using System.Xml;
+using System.Xml.Serialization;
 
 namespace SrvFolloweR
 {
-    public partial class Form2 : Form
+    public partial class Form2 : Form1
     {
         internal List<Call> callslist;
         //internal static double LastCallId = 1;
@@ -27,7 +29,7 @@ namespace SrvFolloweR
             InitializeComponent();
             callslist = new List<Call>();
             callBindingSource.DataSource = callslist;
-            FirstLoad();
+            //CsvLoad();
             Ui_Language();
             DataGrid_Language();
             Update();
@@ -131,12 +133,12 @@ namespace SrvFolloweR
         }
         private void button_exit_Click(object sender, EventArgs e)
         {
-            LastSave();
+            //LastSave();
             Form1 form1 = new Form1();
             this.Close();
             form1.Close();
             form1.WriteSettings();
-            form1.LastSave();
+            form1.CsvSave();
             Environment.Exit(0);
         }
         private void button_Back_Click(object sender, EventArgs e)
@@ -148,115 +150,52 @@ namespace SrvFolloweR
         #endregion
 
         #region save-load handaling
-        void LastSave()
-        {
-            StreamWriter sw;
-            if (!Directory.Exists("Data"))
-                Directory.CreateDirectory("Data");
-            using (sw = new StreamWriter(@"Data/" + formHeader + ".csv"))
-            {
-                var writer = new CsvWriter(sw);
-                writer.WriteHeader(typeof(Call));
-                foreach (Call calls in callBindingSource.DataSource as List<Call>)
-                {
-                    writer.WriteRecord(calls);
-                }
-                sw.Close();
-            }
-            using (sw = new StreamWriter(@"Data/" + formHeader + DateTime.Today.Month.ToString() + ".csv"))
-            {
-                var writer = new CsvWriter(sw);
-                writer.WriteHeader(typeof(Call));
-                foreach (Call calls in callBindingSource.DataSource as List<Call>)
-                {
-                    writer.WriteRecord(calls);
-                }
-                sw.Close();
-            }
-            sw.Dispose();
-        }
         void LoadCalls()
-        {
-            CsvReader csv = null;
-            StreamReader str = null;
-            if (File.Exists(@"Data/" + formHeader + ".csv"))
-            {
-                try
-                {
-                    str = new StreamReader(@"Data/" + formHeader + ".csv");
-                    csv = new CsvReader(str);
-                    callBindingSource.DataSource = csv.GetRecords<Call>().ToList();
-                    //var header = csv.FieldHeaders;
-                    Update();
-                    str.Close();
-                    MessageBox.Show(msg_load_ok, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-            }
-            else
-            {
-                MessageBox.Show(msg_load_fail, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            csv.Dispose();
-            str.Dispose();
+        {      
+               
+            //CsvReader csv = null;
+            //StreamReader str = null;
+            //if (File.Exists(@"Data/" + formHeader + ".csv"))
+            //{
+            //    try
+            //    {
+            //        str = new StreamReader(@"Data/" + formHeader + ".csv");
+            //        csv = new CsvReader(str);
+            //        callBindingSource.DataSource = csv.GetRecords<Call>().ToList();
+            //        //var header = csv.FieldHeaders;
+            //        Update();
+            //        str.Close();
+            //        MessageBox.Show(msg_load_ok, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        MessageBox.Show(ex.Message);
+            //    }
+            //}
+            //else
+            //{
+            //    MessageBox.Show(msg_load_fail, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //}
+            //csv.Dispose();
+            //str.Dispose();
         }
         void Save()
         {
-            StreamWriter sw;
-            if (!Directory.Exists("Data"))
-                Directory.CreateDirectory("Data");
-            using (sw = new StreamWriter(@"Data/" + formHeader + ".csv"))
-            {
-                var writer = new CsvWriter(sw);
-                writer.WriteHeader(typeof(Call));
-                foreach (Call calls in callBindingSource.DataSource as List<Call>)
-                {
-                    writer.WriteRecord(calls);
-                }
-                sw.Close();
-            }
-            MessageBox.Show(msg_save_ok, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            sw.Dispose();
-        }
-
-        private void FirstLoad()
-        {
-            if (!Directory.Exists("Data"))
-            {
-                Directory.CreateDirectory("Data");
-                File.Create(@"Data/" + formHeader + ".csv");
-            }
-            else
-            {
-                if (File.Exists(@"Data/" + formHeader + ".csv"))
-                {
-                    CsvReader csv = null;
-                    StreamReader str = null;
-                    try
-                    {
-                        str = new StreamReader(@"Data/" + formHeader + ".csv");
-                        csv = new CsvReader(str);
-                        callBindingSource.DataSource = csv.GetRecords<Call>().ToList();
-                        //var header = csv.FieldHeaders;
-                        str.Close();
-                        csv.Dispose();
-                        Update();
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message);
-                    }
-                    str.Dispose();
-                    csv.Dispose();
-                }
-                else
-                {
-                    File.Create(@"Data/" + formHeader + ".csv");
-                }
-            }
+            //StreamWriter sw;
+            //if (!Directory.Exists("Data"))
+            //    Directory.CreateDirectory("Data");
+            //using (sw = new StreamWriter(@"Data/" + formHeader + ".csv"))
+            //{
+            //    var writer = new CsvWriter(sw);
+            //    writer.WriteHeader(typeof(Call));
+            //    foreach (Call calls in callBindingSource.DataSource as List<Call>)
+            //    {
+            //        writer.WriteRecord(calls);
+            //    }
+            //    sw.Close();
+            //}
+            //MessageBox.Show(msg_save_ok, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //sw.Dispose();
         }
         #endregion
 
