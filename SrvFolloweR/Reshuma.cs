@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Runtime.Serialization;
 
 namespace SrvFolloweR
 {
+    [Serializable]
     public class Reshuma
     {
         public Reshuma(int reshumaid,string company, string zone, string phonenumber, DateTime enddate)
@@ -19,13 +21,13 @@ namespace SrvFolloweR
 
         public Reshuma()
         {
-            ReshumaId = Form1.LastId;
+            ReshumaId = 0;//Form1.LastId;
             Company = "";
             Zone = "";
             PhoneNumber = "0";
             EndDate = DateTime.Now;
         }
-
+        //private List<Call> Calls { get; set; }
         public string Company { get; set; }
         public string Zone { get; set; }
         public string PhoneNumber { get; set; }

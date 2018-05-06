@@ -12,33 +12,26 @@ namespace SrvFolloweR
 {
     public partial class Form1 : Form
     {
-        List<Reshuma> resh;
-        internal static bool Benglish = false;
-        internal static bool mainfullscreen = false;
-        internal static bool isuser = false;
-        internal static int LastId = 1;
         DateTimePicker dtp;
         int selectedrow;
         internal static string callsfilename;
 
-        #region form handaling
         public Form1()
         {
             InitializeComponent();
-            resh = new List<Reshuma>();
             ReadSettings();
             Load_Autoload_Settings();
             Ui_Language();
-            CsvLoad();
+            LoadFile();
             DataGrid_Language();
-            reshumaBindingSource.DataSource = resh;
+            reshumaBindingSource.DataSource = DataHandler.reshumas;
             Update();
         }
         private void Form1_Resize(object sender, EventArgs e)
         {
-            if (isuser)
+            if (DataHandler.isuser)
             {
-                mainfullscreen = !mainfullscreen;
+                DataHandler.mainfullscreen = !DataHandler.mainfullscreen;
             }
             dtp.Width = dataGridView1.Columns[4].Width;
             dataGridView1.Columns[0].Width = 80;
@@ -53,21 +46,21 @@ namespace SrvFolloweR
             dtp.ValueChanged += this.dtp_ValueChanged;
             dataGridView1.Columns[0].Width = 80;
             FindDates();
-            if (mainfullscreen)
+            if (DataHandler.mainfullscreen)
             {
                 this.WindowState = FormWindowState.Maximized;
             }
-            isuser = true;
+            DataHandler.isuser = true;
         }
         private void button_exit_Click(object sender, EventArgs e)
         {
             WriteSettings();
-            CsvSave();
+            SaveFile();
             Environment.Exit(0);
         }
         void Load_Autoload_Settings()
         {
-            if (Benglish)
+            if (DataHandler.Benglish)
             {
                 checkBox_English.Checked = true;
             }
@@ -90,20 +83,17 @@ namespace SrvFolloweR
                 }
             }
         }
-        #endregion
-
-        #region ui handaling
         private void button2_savelist_Click(object sender, EventArgs e)
         {
-            CsvSave();
+            SaveFile();
         }
         private void button1_getlist_Click(object sender, EventArgs e)
         {
-            CsvLoad();
+            LoadFile();
         }
         private void Ui_Language()
         {
-            if (!Benglish)
+            if (!DataHandler.Benglish)
             {
                 checkBox_English.Text = "English";
                 this.Text = "מבצעים";
@@ -116,7 +106,7 @@ namespace SrvFolloweR
         }
         private void DataGrid_Language()
         {
-            if (!Benglish)
+            if (!DataHandler.Benglish)
             {
                 dataGridView1.RightToLeft = RightToLeft.Yes;
                 dataGridView1.Columns[0].HeaderText = "מס'";
@@ -142,81 +132,21 @@ namespace SrvFolloweR
             if (checkBox_English.Checked)
             {
                 checkBox_English.Checked = true;
-                Benglish = true;
+                DataHandler.Benglish = true;
             }
             else
             {
                 checkBox_English.Checked = false;
-                Benglish = false;
+                DataHandler.Benglish = false;
             }
             Ui_Language();
             DataGrid_Language();
             this.Update();
         }
-
         private void button_GetCalls_Click(object sender, EventArgs e)
         {
-            CsvSave();
+            SaveFile();
             GetCalls();
-        }
-        #endregion
-
-        #region save-load handaling
-        internal void CsvSave()
-        {
-            if (!Directory.Exists("Data"))
-                Directory.CreateDirectory("Data");
-            //FileStream stream = new FileStream(@"Data/dat.xml", FileMode.OpenOrCreate);
-            //if (reshumaBindingSource == null) { return; }
-            try
-            {
-                XmlDocument xmlDocument = new XmlDocument();
-                XmlSerializer serializer = new XmlSerializer(reshumaBindingSource.GetType());
-                using (MemoryStream stream = new MemoryStream())
-                {
-                    serializer.Serialize(stream, reshumaBindingSource);
-                    stream.Position = 0;
-                    xmlDocument.Load(stream);
-                    xmlDocument.Save(@"Data/dat.xml");
-                    stream.Close();
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
-        }
-        internal void CsvLoad()
-        {
-            List<Reshuma> objectOut = default(List<Reshuma>);
-            if (File.Exists(@"Data/dat.xml"))
-            {
-                try
-                {
-                    XmlDocument xmlDocument = new XmlDocument();
-                    xmlDocument.Load(@"Data/dat.xml");
-                    string xmlString = xmlDocument.OuterXml;
-
-                    using (StringReader read = new StringReader(xmlString))
-                    {
-                        Type outType = typeof(Reshuma);
-
-                        XmlSerializer serializer = new XmlSerializer(outType);
-                        using (XmlReader reader = new XmlTextReader(read))
-                        {
-                            objectOut = (List<Reshuma>)serializer.Deserialize(reader);
-                            reader.Close();
-                        }
-
-                        read.Close();
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.ToString());
-                }
-            }
-            resh = objectOut;
         }
         private void ReadSettings()
         {
@@ -226,7 +156,7 @@ namespace SrvFolloweR
                 {
                     string readMeText = readtext.ReadLine();
                     string[] words = readMeText.Split(';');
-                    Benglish = bool.Parse(words[0]);
+                    DataHandler.Benglish = bool.Parse(words[0]);
                 }
             }
         }
@@ -234,7 +164,7 @@ namespace SrvFolloweR
         {
             using (StreamWriter writetext = new StreamWriter("confg.set"))
             {
-                writetext.WriteLine("{0};{1}", Benglish);
+                writetext.WriteLine("{0};", DataHandler.Benglish);
             }
         }
         void GetCalls()
@@ -247,18 +177,14 @@ namespace SrvFolloweR
             {
                 Form2 form2 = new Form2(callsfilename);
                 form2.Show();
-                isuser = false;
+                DataHandler.isuser = false;
                 this.Hide();
             }
         }
-        #endregion
-
-        #region cell handeling
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             WriteSettings();
         }
-
         private void dataGridView1_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
         {
             try
@@ -285,7 +211,29 @@ namespace SrvFolloweR
             {
                 MessageBox.Show(ex.Message);
             }
-            CsvSave();
+            //SaveFile();
+        }
+        private void SaveFile()
+        {
+            try
+            {
+                DataHandler.Save();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        private void LoadFile()
+        {
+            try
+            {
+                DataHandler.Load();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
         private void dataGridView1_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
@@ -306,10 +254,10 @@ namespace SrvFolloweR
                 if (reshumaBindingSource.Count > 0)
                 {
                     Reshuma temp = (Reshuma)reshumaBindingSource[reshumaBindingSource.Count - 1];
-                    LastId = temp.ReshumaId + 1;
+                   // LastId = temp.ReshumaId + 1;
                 }
             }
-            CsvSave();
+            SaveFile();
         }
         private void dtp_ValueChanged(object sender, EventArgs e)
         {
@@ -319,7 +267,6 @@ namespace SrvFolloweR
         {
             selectedrow = e.RowIndex;
         }
-
         void FindDates()
         {
             for (int i = 0; i < reshumaBindingSource.Count; i++)
@@ -361,6 +308,5 @@ namespace SrvFolloweR
                 }
             }
         }
-        #endregion
     }
 }

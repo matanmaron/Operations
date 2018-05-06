@@ -3,15 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Runtime.Serialization;
 
 namespace SrvFolloweR
 {
+    //[Serializable]
     public class Call
     {
-        public Call(int callid, string reprepresentative, string contents, DateTime calldate, string remarks)
+        public Call(int callid, string representative, string contents, DateTime calldate, string remarks)
         {
             CallID = callid;
-            Reprepresentative = reprepresentative;
+            Representative = representative;
             Contents = contents;
             CallDate = calldate;
             Remarks = remarks;
@@ -19,8 +21,8 @@ namespace SrvFolloweR
 
         public Call()
         {
-            //CallID = Form2.LastCallId;
-            Reprepresentative = "";
+            CallID = 0;
+            Representative = "";
             Contents = "";
             CallDate = DateTime.Now;
             Remarks = "";
@@ -28,7 +30,7 @@ namespace SrvFolloweR
         }
 
         public double CallID { get; set; }
-        public string Reprepresentative { get; set; }
+        public string Representative { get; set; }
         public string Contents { get; set; }
         private int CallDateint;
         public DateTime CallDate {

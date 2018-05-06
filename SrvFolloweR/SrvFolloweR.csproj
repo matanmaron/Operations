@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="Call.cs" />
     <Compile Include="Data.cs" />
+    <Compile Include="DataHandler.cs" />
     <Compile Include="Form2.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -81,6 +82,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="ClassDiagram1.cd" />
     <None Include="packages.config" />
     <None Include="Properties\DataSources\Call.datasource" />
     <None Include="Properties\DataSources\Reshuma.datasource" />

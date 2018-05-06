@@ -5,8 +5,6 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
-using System.Xml;
-using System.Xml.Serialization;
 
 namespace SrvFolloweR
 {
@@ -16,13 +14,8 @@ namespace SrvFolloweR
         //internal static double LastCallId = 1;
         DateTimePicker dtp;
         string formHeader;
-        string msg_save_ok;
-        string msg_load_ok;
-        string msg_load_fail;
         int selectedrow;
-        bool isuser = false;
 
-        #region form handaling
         public Form2(string callsfilename)
         {
             formHeader = callsfilename;
@@ -36,14 +29,14 @@ namespace SrvFolloweR
         }
         private void Form2_Resize(object sender, EventArgs e)
         {
-            if (isuser)
+            if (DataHandler.isuser)
             {
-                Form1.mainfullscreen = !Form1.mainfullscreen;
+                DataHandler.mainfullscreen = !DataHandler.mainfullscreen;
             }
             dtp.Width = dataGridView2.Columns[4].Width;
             dataGridView2.Columns[0].Width = 80;
             dataGridView2.Columns[1].Width = 100;
-            if (Form1.mainfullscreen)
+            if (DataHandler.mainfullscreen)
                 dataGridView2.Columns[2].Width = 600;
             else
                 dataGridView2.Columns[2].Width = 300;
@@ -63,44 +56,19 @@ namespace SrvFolloweR
             dataGridView2.Columns[5].Width = 200;
             dataGridView2.Columns[2].DefaultCellStyle.Font = new Font("Microsoft Sans Serif", 10);
             dataGridView2.Columns[5].DefaultCellStyle.Font = new Font("Microsoft Sans Serif", 10);
-            if (Form1.mainfullscreen)
+            if (DataHandler.mainfullscreen)
             {
                 this.WindowState = FormWindowState.Maximized;
             }
-            isuser = true;
+            DataHandler.isuser = true;
         }
-        #endregion
-
-        #region ui handaling
         private void Ui_Language()
         {
-            if (!Form1.Benglish)
-            {
-                //button_SaveExit.Text = "שמור וחזור";
-                msg_save_ok = "שמירה בוצעה בהצלחה !";
-                //button_Save.Text = "שמירה";
-                //button_Back.Text = "חזור";
-                //button_LoadCalls.Text = "טעינה";
-                msg_load_ok = "טעינה בוצעה בהצלחה !";
-                msg_load_fail = "טעינה נכשלה !";
-            }
-            else
-            {
-
-                //button_SaveExit.Text = @"Save & Back";
-                //button_Back.Text = "Go Back";
-                this.Text = Form1.callsfilename;
-                msg_save_ok = "Saved successfully !";
-                //button_Save.Text = "Save";
-                //button_LoadCalls.Text = "Load";
-                msg_load_ok = "Load successfully !";
-                msg_load_fail = "Load Failed !";
-            }
             this.Text = formHeader;
         }
         private void DataGrid_Language()
         {
-            if (!Form1.Benglish)
+            if (!DataHandler.Benglish)
             {
                 dataGridView2.RightToLeft = RightToLeft.Yes;
                 dataGridView2.Columns[0].HeaderText = "מס'";
@@ -125,11 +93,11 @@ namespace SrvFolloweR
         }
         private void button_Save_Click(object sender, EventArgs e)
         {
-            Save();
+            SaveFile();
         }
         private void button_LoadCalls_Click(object sender, EventArgs e)
         {
-            LoadCalls();
+            //LoadCalls();
         }
         private void button_exit_Click(object sender, EventArgs e)
         {
@@ -138,7 +106,7 @@ namespace SrvFolloweR
             this.Close();
             form1.Close();
             form1.WriteSettings();
-            form1.CsvSave();
+            SaveFile();
             Environment.Exit(0);
         }
         private void button_Back_Click(object sender, EventArgs e)
@@ -147,59 +115,14 @@ namespace SrvFolloweR
             form1.Show();
             this.Close();
         }
-        #endregion
-
-        #region save-load handaling
-        void LoadCalls()
-        {      
-               
-            //CsvReader csv = null;
-            //StreamReader str = null;
-            //if (File.Exists(@"Data/" + formHeader + ".csv"))
-            //{
-            //    try
-            //    {
-            //        str = new StreamReader(@"Data/" + formHeader + ".csv");
-            //        csv = new CsvReader(str);
-            //        callBindingSource.DataSource = csv.GetRecords<Call>().ToList();
-            //        //var header = csv.FieldHeaders;
-            //        Update();
-            //        str.Close();
-            //        MessageBox.Show(msg_load_ok, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        MessageBox.Show(ex.Message);
-            //    }
-            //}
-            //else
-            //{
-            //    MessageBox.Show(msg_load_fail, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            //}
-            //csv.Dispose();
-            //str.Dispose();
-        }
-        void Save()
+        void LoadFile()
         {
-            //StreamWriter sw;
-            //if (!Directory.Exists("Data"))
-            //    Directory.CreateDirectory("Data");
-            //using (sw = new StreamWriter(@"Data/" + formHeader + ".csv"))
-            //{
-            //    var writer = new CsvWriter(sw);
-            //    writer.WriteHeader(typeof(Call));
-            //    foreach (Call calls in callBindingSource.DataSource as List<Call>)
-            //    {
-            //        writer.WriteRecord(calls);
-            //    }
-            //    sw.Close();
-            //}
-            //MessageBox.Show(msg_save_ok, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            //sw.Dispose();
+            DataHandler.Load();
         }
-        #endregion
-
-        #region cell handeling
+        void SaveFile()
+        {
+            DataHandler.Save();
+        }
         private void dataGridView2_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             if (dataGridView2.Focused && dataGridView2.CurrentCell.ColumnIndex == 0)
@@ -266,6 +189,5 @@ namespace SrvFolloweR
                 MessageBox.Show(ex.Message);
             }
         }
-        #endregion
     }
 }
