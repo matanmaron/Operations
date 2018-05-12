@@ -84,10 +84,9 @@ C:\Users\matan\Source\Repos\Operations\SrvFolloweR\bin\Debug\SrvFolloweR.exe
 C:\Users\matan\Source\Repos\Operations\SrvFolloweR\bin\Debug\SrvFolloweR.pdb
 C:\Users\matan\Source\Repos\Operations\SrvFolloweR\bin\Debug\CsvHelper.dll
 C:\Users\matan\Source\Repos\Operations\SrvFolloweR\bin\Debug\CsvHelper.xml
-C:\Users\matan\Source\Repos\Operations\SrvFolloweR\obj\Debug\SrvFolloweR.csprojResolveAssemblyReference.cache
-C:\Users\matan\Source\Repos\Operations\SrvFolloweR\obj\Debug\SrvFolloweR.Form2.resources
 C:\Users\matan\Source\Repos\Operations\SrvFolloweR\obj\Debug\SrvFolloweR.Form1.resources
 C:\Users\matan\Source\Repos\Operations\SrvFolloweR\obj\Debug\SrvFolloweR.Properties.Resources.resources
 C:\Users\matan\Source\Repos\Operations\SrvFolloweR\obj\Debug\SrvFolloweR.csproj.GenerateResource.Cache
 C:\Users\matan\Source\Repos\Operations\SrvFolloweR\obj\Debug\SrvFolloweR.exe
 C:\Users\matan\Source\Repos\Operations\SrvFolloweR\obj\Debug\SrvFolloweR.pdb
+C:\Users\matan\Source\Repos\Operations\SrvFolloweR\obj\Debug\SrvFolloweR.csprojResolveAssemblyReference.cache

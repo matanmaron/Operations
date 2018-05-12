@@ -1,33 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Runtime.Serialization;
 
 namespace SrvFolloweR
 {
-    [Serializable]
     public class Reshuma
     {
-        public Reshuma(int reshumaid,string company, string zone, string phonenumber, DateTime enddate)
-        {
-            ReshumaId = reshumaid;
-            Company = company;    
-            Zone = zone;
-            PhoneNumber = phonenumber;
-            EndDate = enddate;
-        }
-
-        public Reshuma()
-        {
-            ReshumaId = 0;//Form1.LastId;
-            Company = "";
-            Zone = "";
-            PhoneNumber = "0";
-            EndDate = DateTime.Now;
-        }
-        //private List<Call> Calls { get; set; }
         public string Company { get; set; }
         public string Zone { get; set; }
         public string PhoneNumber { get; set; }
@@ -42,11 +19,36 @@ namespace SrvFolloweR
             }
         set
             {
-                EndDateint = (int)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
+                EndDateint = (int)(value.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
             }
         }
         public int ReshumaId { get; set; }
+        public List<Call> Calls { get; set; }
 
+        public Reshuma()
+        {
+            if (DataHandler.reshumas.Capacity > 0)
+            {
+                int max = 1;
+                foreach (var resh in DataHandler.reshumas)
+                {
+                    if (resh.ReshumaId > max)
+                    {
+                        max = resh.ReshumaId;
+                    }
+                }
+                ReshumaId = max + 1;
+            }
+            else
+            {
+                ReshumaId = 1;
+            }
+            Company = string.Empty;
+            Zone = string.Empty;
+            PhoneNumber = string.Empty;
+            EndDate = DateTime.Now;
+            Calls = new List<Call>();
+        }
         public static DateTime UnixTimeStampToDateTime(int unixTimeStamp)
         {
             // Unix timestamp is seconds past epoch

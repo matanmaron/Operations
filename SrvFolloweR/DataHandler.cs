@@ -10,11 +10,11 @@ namespace SrvFolloweR
 {
     static class DataHandler
     {
-        internal static List<Reshuma> reshumas;
+        internal static List<Reshuma> reshumas = new List<Reshuma>();
         internal static bool Benglish = false;
         internal static bool mainfullscreen = false;
         internal static bool isuser = false;
-
+        internal static int selectedid = 0;
         internal static void Save()
         {
             if (!Directory.Exists("Data"))
@@ -23,7 +23,7 @@ namespace SrvFolloweR
             //if (reshumaBindingSource == null) { return; }
             try
             {
-                XmlSerializer serializer = new XmlSerializer(typeof(List<Reshuma>));
+                XmlSerializer serializer = new XmlSerializer(reshumas.GetType());
                 using (FileStream fs = new FileStream(@"Data/dat.xml", FileMode.Create, FileAccess.Write, FileShare.None))
                 {
                     serializer.Serialize(fs, reshumas);
@@ -47,8 +47,12 @@ namespace SrvFolloweR
                     XmlSerializer deserializer = new XmlSerializer(typeof(List<Reshuma>));
                     using (FileStream fs = File.OpenRead(@"Data/dat.xml"))
                     {
-                        reshumas = (List<Reshuma>)deserializer.Deserialize(fs);
+                        objectOut = (List<Reshuma>)deserializer.Deserialize(fs);
                         fs.Close();
+                        if (objectOut.Count>0)
+                        {
+                        reshumas = objectOut;
+                        }
                     }
                 }
                 catch (Exception ex)
@@ -56,7 +60,6 @@ namespace SrvFolloweR
                     throw ex;
                 }
             }
-            reshumas = objectOut;
         }
     }
 }

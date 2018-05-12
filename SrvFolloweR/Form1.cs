@@ -13,8 +13,8 @@ namespace SrvFolloweR
     public partial class Form1 : Form
     {
         DateTimePicker dtp;
-        int selectedrow;
-        internal static string callsfilename;
+        int selectedReshRow;
+        int selectedCallRow;
 
         public Form1()
         {
@@ -25,6 +25,7 @@ namespace SrvFolloweR
             LoadFile();
             DataGrid_Language();
             reshumaBindingSource.DataSource = DataHandler.reshumas;
+            HideCalls();
             Update();
         }
         private void Form1_Resize(object sender, EventArgs e)
@@ -75,7 +76,7 @@ namespace SrvFolloweR
             {
                 try
                 {
-                    dataGridView1.Rows.RemoveAt(selectedrow);
+                    dataGridView1.Rows.RemoveAt(selectedReshRow);
                 }
                 catch (Exception ex)
                 {
@@ -114,6 +115,13 @@ namespace SrvFolloweR
                 dataGridView1.Columns[2].HeaderText = "תחום";
                 dataGridView1.Columns[3].HeaderText = "טלפון";
                 dataGridView1.Columns[4].HeaderText = "תאריך סיום";
+                dataGridView2.RightToLeft = RightToLeft.Yes;
+                dataGridView2.Columns[0].HeaderText = "מס'";
+                dataGridView2.Columns[1].HeaderText = "נציג";
+                dataGridView2.Columns[2].HeaderText = "תוכן השיחה";
+                dataGridView2.Columns[3].HeaderText = "תאריך שיחה";
+                dataGridView2.Columns[4].HeaderText = "סיום מבצע";
+                dataGridView2.Columns[5].HeaderText = "הערות";
             }
             else
             {
@@ -123,9 +131,18 @@ namespace SrvFolloweR
                 dataGridView1.Columns[2].HeaderText = "Field";
                 dataGridView1.Columns[3].HeaderText = "Phone Number";
                 dataGridView1.Columns[4].HeaderText = "End Date";
+                dataGridView2.RightToLeft = RightToLeft.No;
+                dataGridView2.Columns[0].HeaderText = "ID";
+                dataGridView2.Columns[1].HeaderText = "Reprepresentative";
+                dataGridView2.Columns[2].HeaderText = "Call Content";
+                dataGridView2.Columns[3].HeaderText = "Call Date";
+                dataGridView2.Columns[4].HeaderText = "End Date";
+                dataGridView2.Columns[5].HeaderText = "Remarks";
             }
             dataGridView1.Columns[4].DefaultCellStyle.Format = "dd/MM/yyyy";
             dataGridView1.Columns[4].DefaultCellStyle.BackColor = Color.LightGray;
+            dataGridView2.Columns[3].DefaultCellStyle.Format = "dd/MM/yyyy";
+            dataGridView2.Columns[4].DefaultCellStyle.Format = "dd/MM/yyyy";
         }
         private void checkBox_English_CheckedChanged(object sender, EventArgs e)
         {
@@ -169,27 +186,43 @@ namespace SrvFolloweR
         }
         void GetCalls()
         {
-            if (dataGridView1.Rows[selectedrow].Cells[1].Value!=null && dataGridView1.Rows[selectedrow].Cells[2].Value != null)
+            if (dataGridView1.Rows[selectedReshRow].Cells[1].Value != null && dataGridView1.Rows[selectedReshRow].Cells[2].Value != null)
             {
-                callsfilename = dataGridView1.Rows[selectedrow].Cells[1].Value.ToString() + dataGridView1.Rows[selectedrow].Cells[2].Value.ToString();
+                DataHandler.selectedid = (int)dataGridView1.Rows[selectedReshRow].Cells[0].Value;
             }
-                if (callsfilename != "" && callsfilename != null)
+            if (DataHandler.selectedid > 0)
             {
-                Form2 form2 = new Form2(callsfilename);
-                form2.Show();
-                DataHandler.isuser = false;
-                this.Hide();
+                ShowCalls();
             }
         }
+
+        private void ShowCalls()
+        {
+            dataGridView1.Hide();
+            button_GetCalls.Hide();
+            button_Back.Show();
+            dataGridView2.DataSource = DataHandler.reshumas.Find(x => x.ReshumaId == DataHandler.selectedid).Calls;
+            dataGridView2.Show();
+        }
+        private void HideCalls()
+        {
+            button_Back.Hide();
+            dataGridView2.DataSource = null;
+            dataGridView2.Hide();
+            dataGridView1.Show();
+            button_GetCalls.Show();
+        }
+
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
+            SaveFile();
             WriteSettings();
         }
         private void dataGridView1_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
         {
             try
             {
-                if (dataGridView1.Focused && dataGridView1.CurrentCell.ColumnIndex==4)
+                if (dataGridView1.Focused && dataGridView1.CurrentCell.ColumnIndex == 4)
                 {
                     dtp.Location = dataGridView1.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, false).Location;
                     dtp.Visible = true;
@@ -218,6 +251,7 @@ namespace SrvFolloweR
             try
             {
                 DataHandler.Save();
+
             }
             catch (Exception ex)
             {
@@ -248,15 +282,6 @@ namespace SrvFolloweR
             {
                 MessageBox.Show(ex.Message);
             }
-
-            if (dataGridView1.Focused && dataGridView1.CurrentCell.ColumnIndex == 0)
-            {
-                if (reshumaBindingSource.Count > 0)
-                {
-                    Reshuma temp = (Reshuma)reshumaBindingSource[reshumaBindingSource.Count - 1];
-                   // LastId = temp.ReshumaId + 1;
-                }
-            }
             SaveFile();
         }
         private void dtp_ValueChanged(object sender, EventArgs e)
@@ -265,7 +290,7 @@ namespace SrvFolloweR
         }
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            selectedrow = e.RowIndex;
+            selectedReshRow = e.RowIndex;
         }
         void FindDates()
         {
@@ -307,6 +332,78 @@ namespace SrvFolloweR
 
                 }
             }
+        }
+
+        private void dataGridView2_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            SaveFile();
+        }
+
+        private void dataGridView2_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Delete)
+            {
+                try
+                {
+                    dataGridView2.Rows.RemoveAt(selectedCallRow);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+
+            }
+        }
+
+        private void dataGridView2_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            selectedCallRow = e.RowIndex;
+            dtp.Visible = false;
+        }
+
+        private void dataGridView2_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
+        {
+            selectedCallRow = e.RowIndex;
+            try
+            {
+                if (dataGridView2.Focused && (dataGridView2.CurrentCell.ColumnIndex == 3 || dataGridView2.CurrentCell.ColumnIndex == 4))
+                {
+                    dtp.Width = dataGridView2.Columns[e.ColumnIndex].Width;
+                    Point myp = dataGridView2.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, false).Location;
+                    myp.Y += (dataGridView2.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, false).Height / 2) - (dtp.Size.Height / 2);
+                    dtp.Location = myp;
+                    dtp.Visible = true;
+                    dtp.Size = dataGridView2.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, false).Size;
+                    if (dataGridView2.CurrentCell.Value != DBNull.Value)
+                    {
+                        dtp.Value = (DateTime)dataGridView2.CurrentCell.Value;
+                    }
+                    else
+                    {
+                        dtp.Value = DateTime.Today;
+                    }
+                }
+                else
+                {
+                    dtp.Visible = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void button_Back_Click(object sender, EventArgs e)
+        {
+            SaveFile();
+            HideCalls();
+        }
+
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            SaveFile();
+            HideCalls();
         }
     }
 }
