@@ -33,7 +33,7 @@ namespace SrvFolloweR
             }
             set
             {
-                CallEndint = (int)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
+                CallEndint = (int)(value.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
             }
         }
 

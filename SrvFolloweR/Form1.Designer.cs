@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -39,27 +38,14 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             this.button_SaveExit = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.ReshumaId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.EndDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.button_GetCalls = new System.Windows.Forms.Button();
             this.checkBox_English = new System.Windows.Forms.CheckBox();
             this.button_Back = new System.Windows.Forms.Button();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
-            this.callsBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.reshumaBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.companyDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.zoneDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.phoneNumberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.callIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.representativeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.contentsDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.callDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.remarksDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.callEndDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ReshumaId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.EndDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.callsBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.reshumaBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // button_SaveExit
@@ -88,9 +74,8 @@
             this.dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataGridView1.AutoGenerateColumns = false;
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridView1.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.dataGridView1.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.SteelBlue;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
@@ -102,13 +87,9 @@
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ReshumaId,
-            this.companyDataGridViewTextBoxColumn,
-            this.zoneDataGridViewTextBoxColumn,
-            this.phoneNumberDataGridViewTextBoxColumn,
             this.EndDate});
-            this.dataGridView1.DataSource = this.reshumaBindingSource;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.Gray;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             dataGridViewCellStyle3.ForeColor = System.Drawing.Color.White;
             dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.DodgerBlue;
@@ -119,7 +100,7 @@
             this.dataGridView1.Location = new System.Drawing.Point(12, 68);
             this.dataGridView1.Name = "dataGridView1";
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.Gray;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             dataGridViewCellStyle4.ForeColor = System.Drawing.Color.White;
             dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.DodgerBlue;
@@ -132,21 +113,6 @@
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             this.dataGridView1.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellEndEdit);
             this.dataGridView1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dataGridView1_KeyDown);
-            // 
-            // ReshumaId
-            // 
-            this.ReshumaId.DataPropertyName = "ReshumaId";
-            this.ReshumaId.HeaderText = "ReshumaId";
-            this.ReshumaId.Name = "ReshumaId";
-            this.ReshumaId.ReadOnly = true;
-            // 
-            // EndDate
-            // 
-            this.EndDate.DataPropertyName = "EndDate";
-            this.EndDate.HeaderText = "EndDate";
-            this.EndDate.Name = "EndDate";
-            this.EndDate.ReadOnly = true;
-            this.EndDate.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             // 
             // button_GetCalls
             // 
@@ -202,11 +168,10 @@
             this.dataGridView2.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
             this.dataGridView2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataGridView2.AutoGenerateColumns = false;
             this.dataGridView2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridView2.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.dataGridView2.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
             dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.SteelBlue;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.IndianRed;
             dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             dataGridViewCellStyle6.ForeColor = System.Drawing.Color.White;
             dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.DodgerBlue;
@@ -214,16 +179,8 @@
             dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridView2.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.callIDDataGridViewTextBoxColumn,
-            this.representativeDataGridViewTextBoxColumn,
-            this.contentsDataGridViewTextBoxColumn,
-            this.callDateDataGridViewTextBoxColumn,
-            this.remarksDataGridViewTextBoxColumn,
-            this.callEndDataGridViewTextBoxColumn});
-            this.dataGridView2.DataSource = this.callsBindingSource;
             dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.Color.Gray;
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             dataGridViewCellStyle7.ForeColor = System.Drawing.Color.White;
             dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.DodgerBlue;
@@ -231,10 +188,10 @@
             dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridView2.DefaultCellStyle = dataGridViewCellStyle7;
             this.dataGridView2.GridColor = System.Drawing.Color.Silver;
-            this.dataGridView2.Location = new System.Drawing.Point(12, 100);
+            this.dataGridView2.Location = new System.Drawing.Point(12, 101);
             this.dataGridView2.Name = "dataGridView2";
             dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.Color.Gray;
+            dataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             dataGridViewCellStyle8.ForeColor = System.Drawing.Color.White;
             dataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.DodgerBlue;
@@ -248,74 +205,25 @@
             this.dataGridView2.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellEndEdit);
             this.dataGridView2.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dataGridView2_KeyDown);
             // 
-            // callsBindingSource
+            // ReshumaId
             // 
-            this.callsBindingSource.DataMember = "Calls";
-            this.callsBindingSource.DataSource = this.reshumaBindingSource;
+            this.ReshumaId.DataPropertyName = "ReshumaId";
+            this.ReshumaId.HeaderText = "ReshumaId";
+            this.ReshumaId.Name = "ReshumaId";
+            this.ReshumaId.ReadOnly = true;
             // 
-            // reshumaBindingSource
+            // EndDate
             // 
-            this.reshumaBindingSource.DataSource = typeof(SrvFolloweR.Reshuma);
-            // 
-            // companyDataGridViewTextBoxColumn
-            // 
-            this.companyDataGridViewTextBoxColumn.DataPropertyName = "Company";
-            this.companyDataGridViewTextBoxColumn.HeaderText = "Company";
-            this.companyDataGridViewTextBoxColumn.Name = "companyDataGridViewTextBoxColumn";
-            // 
-            // zoneDataGridViewTextBoxColumn
-            // 
-            this.zoneDataGridViewTextBoxColumn.DataPropertyName = "Zone";
-            this.zoneDataGridViewTextBoxColumn.HeaderText = "Zone";
-            this.zoneDataGridViewTextBoxColumn.Name = "zoneDataGridViewTextBoxColumn";
-            // 
-            // phoneNumberDataGridViewTextBoxColumn
-            // 
-            this.phoneNumberDataGridViewTextBoxColumn.DataPropertyName = "PhoneNumber";
-            this.phoneNumberDataGridViewTextBoxColumn.HeaderText = "PhoneNumber";
-            this.phoneNumberDataGridViewTextBoxColumn.Name = "phoneNumberDataGridViewTextBoxColumn";
-            // 
-            // callIDDataGridViewTextBoxColumn
-            // 
-            this.callIDDataGridViewTextBoxColumn.DataPropertyName = "CallID";
-            this.callIDDataGridViewTextBoxColumn.HeaderText = "CallID";
-            this.callIDDataGridViewTextBoxColumn.Name = "callIDDataGridViewTextBoxColumn";
-            // 
-            // representativeDataGridViewTextBoxColumn
-            // 
-            this.representativeDataGridViewTextBoxColumn.DataPropertyName = "Representative";
-            this.representativeDataGridViewTextBoxColumn.HeaderText = "Representative";
-            this.representativeDataGridViewTextBoxColumn.Name = "representativeDataGridViewTextBoxColumn";
-            // 
-            // contentsDataGridViewTextBoxColumn
-            // 
-            this.contentsDataGridViewTextBoxColumn.DataPropertyName = "Contents";
-            this.contentsDataGridViewTextBoxColumn.HeaderText = "Contents";
-            this.contentsDataGridViewTextBoxColumn.Name = "contentsDataGridViewTextBoxColumn";
-            // 
-            // callDateDataGridViewTextBoxColumn
-            // 
-            this.callDateDataGridViewTextBoxColumn.DataPropertyName = "CallDate";
-            this.callDateDataGridViewTextBoxColumn.HeaderText = "CallDate";
-            this.callDateDataGridViewTextBoxColumn.Name = "callDateDataGridViewTextBoxColumn";
-            // 
-            // remarksDataGridViewTextBoxColumn
-            // 
-            this.remarksDataGridViewTextBoxColumn.DataPropertyName = "Remarks";
-            this.remarksDataGridViewTextBoxColumn.HeaderText = "Remarks";
-            this.remarksDataGridViewTextBoxColumn.Name = "remarksDataGridViewTextBoxColumn";
-            // 
-            // callEndDataGridViewTextBoxColumn
-            // 
-            this.callEndDataGridViewTextBoxColumn.DataPropertyName = "CallEnd";
-            this.callEndDataGridViewTextBoxColumn.HeaderText = "CallEnd";
-            this.callEndDataGridViewTextBoxColumn.Name = "callEndDataGridViewTextBoxColumn";
+            this.EndDate.DataPropertyName = "EndDate";
+            this.EndDate.HeaderText = "EndDate";
+            this.EndDate.Name = "EndDate";
+            this.EndDate.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
             this.ClientSize = new System.Drawing.Size(1008, 729);
             this.ControlBox = false;
             this.Controls.Add(this.dataGridView2);
@@ -331,8 +239,6 @@
             this.Resize += new System.EventHandler(this.Form1_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.callsBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.reshumaBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -341,23 +247,12 @@
         #endregion
         private System.Windows.Forms.Button button_SaveExit;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.BindingSource reshumaBindingSource;
         private System.Windows.Forms.Button button_GetCalls;
         private System.Windows.Forms.CheckBox checkBox_English;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ReshumaId;
-        private System.Windows.Forms.DataGridViewTextBoxColumn companyDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn zoneDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn phoneNumberDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn EndDate;
         private System.Windows.Forms.Button button_Back;
         private System.Windows.Forms.DataGridView dataGridView2;
-        private System.Windows.Forms.BindingSource callsBindingSource;
-        private System.Windows.Forms.DataGridViewTextBoxColumn callIDDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn representativeDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn contentsDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn callDateDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn remarksDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn callEndDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ReshumaId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn EndDate;
     }
 }
 

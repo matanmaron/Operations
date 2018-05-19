@@ -24,7 +24,7 @@ namespace SrvFolloweR
             Ui_Language();
             LoadFile();
             DataGrid_Language();
-            reshumaBindingSource.DataSource = DataHandler.reshumas;
+            dataGridView1.DataSource = DataHandler.reshumas;
             HideCalls();
             Update();
         }
@@ -52,6 +52,7 @@ namespace SrvFolloweR
                 this.WindowState = FormWindowState.Maximized;
             }
             DataHandler.isuser = true;
+            dataGridView1.Visible = true;
         }
         private void button_exit_Click(object sender, EventArgs e)
         {
@@ -198,19 +199,19 @@ namespace SrvFolloweR
 
         private void ShowCalls()
         {
-            dataGridView1.Hide();
-            button_GetCalls.Hide();
-            button_Back.Show();
+            dataGridView1.Visible = false;
+            button_GetCalls.Visible = false;
+            button_Back.Visible = true;
             dataGridView2.DataSource = DataHandler.reshumas.Find(x => x.ReshumaId == DataHandler.selectedid).Calls;
-            dataGridView2.Show();
+            dataGridView2.Visible = true;
         }
         private void HideCalls()
         {
-            button_Back.Hide();
+            button_Back.Visible = false;
             dataGridView2.DataSource = null;
-            dataGridView2.Hide();
-            dataGridView1.Show();
-            button_GetCalls.Show();
+            dataGridView2.Visible = false;
+            dataGridView1.Visible = false;
+            button_GetCalls.Visible = true;
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -294,9 +295,9 @@ namespace SrvFolloweR
         }
         void FindDates()
         {
-            for (int i = 0; i < reshumaBindingSource.Count; i++)
+            for (int i = 0; i < DataHandler.reshumas.Count; i++)
             {
-                Reshuma item = (Reshuma)reshumaBindingSource[i];
+                Reshuma item = (Reshuma)DataHandler.reshumas[i];
                 string filename = item.Company.ToString() + item.Zone.ToString();
                 if (File.Exists(@"Data/" + filename + ".csv"))
                 {
@@ -373,8 +374,9 @@ namespace SrvFolloweR
                     myp.Y += (dataGridView2.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, false).Height / 2) - (dtp.Size.Height / 2);
                     dtp.Location = myp;
                     dtp.Visible = true;
+                    dtp.BringToFront();
                     dtp.Size = dataGridView2.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, false).Size;
-                    if (dataGridView2.CurrentCell.Value != DBNull.Value)
+                    if (dataGridView2.CurrentCell.Value != null)
                     {
                         dtp.Value = (DateTime)dataGridView2.CurrentCell.Value;
                     }
